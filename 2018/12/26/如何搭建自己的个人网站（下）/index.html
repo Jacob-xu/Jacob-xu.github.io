@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>如何搭建自己的个人网站（下） | Yuan Xu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="域名绑定根据上篇教程，目前默认的域名还是username.github.io，但印象中个人网站好像都是用自己名字的格式的，想要做到这样首先得有个域名  买域名  首先得买一个域名，xx云都能买，我在腾讯云买的。   实名认证审核  买好域名之后，打开域名服务，可以看见你刚买的域名记录。此时你需要做实名认证，很重要，超过有效期（大概3-5天）未认证域名将被锁定。  备案  如果服务器是内地的就需要备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何搭建自己的个人网站（下）">
+<meta property="og:url" content="http://yoursite.com/2018/12/26/如何搭建自己的个人网站（下）/index.html">
+<meta property="og:site_name" content="Yuan Xu">
+<meta property="og:description" content="域名绑定根据上篇教程，目前默认的域名还是username.github.io，但印象中个人网站好像都是用自己名字的格式的，想要做到这样首先得有个域名  买域名  首先得买一个域名，xx云都能买，我在腾讯云买的。   实名认证审核  买好域名之后，打开域名服务，可以看见你刚买的域名记录。此时你需要做实名认证，很重要，超过有效期（大概3-5天）未认证域名将被锁定。  备案  如果服务器是内地的就需要备">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/yuming.png">
+<meta property="og:image" content="http://yoursite.com/img/jiexi.png">
+<meta property="og:updated_time" content="2018-12-26T08:06:57.240Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何搭建自己的个人网站（下）">
+<meta name="twitter:description" content="域名绑定根据上篇教程，目前默认的域名还是username.github.io，但印象中个人网站好像都是用自己名字的格式的，想要做到这样首先得有个域名  买域名  首先得买一个域名，xx云都能买，我在腾讯云买的。   实名认证审核  买好域名之后，打开域名服务，可以看见你刚买的域名记录。此时你需要做实名认证，很重要，超过有效期（大概3-5天）未认证域名将被锁定。  备案  如果服务器是内地的就需要备">
+<meta name="twitter:image" content="http://yoursite.com/img/yuming.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/typing.css">
+  <link rel="stylesheet" href="/css/donate.css">
+  
+</head>
+</html>
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-如何搭建自己的个人网站（下）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <header id="header" class="header">
+    <div class="mobile-nav">
+      <h1 class="nickname">Yuan Xu</h1>
+      <a id="menu">
+        &#9776; Menu
+      </a>
+    </div>
+    
+        <nav id="main-nav" class="main-nav nav-left">
+    
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">关于</a>
+    
+      <a class="main-nav-link" href="/gab">扯谈集</a>
+    
+  </nav>
+</header>
+  <hr>
+  <div class="article-inner">
+    
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何搭建自己的个人网站（下）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <h4 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h4><p>根据上篇教程，目前默认的域名还是username.github.io，但印象中个人网站好像都是用自己名字的格式的，想要做到这样首先得有个域名</p>
+<ul>
+<li>买域名</li>
+</ul>
+<p>首先得买一个域名，xx云都能买，我在<a href="https://dnspod.cloud.tencent.com/act/yearendsales?from=domainlist" target="_blank" rel="noopener">腾讯云</a>买的。</p>
+<p><img src="/img/yuming.png" alt=""></p>
+<ul>
+<li>实名认证审核</li>
+</ul>
+<p>买好域名之后，<a href="https://console.cloud.tencent.com/domain/mydomain" target="_blank" rel="noopener">打开域名服务</a>，可以看见你刚买的域名记录。此时你需要做实名认证，很重要，超过有效期（大概3-5天）未认证域名将被锁定。</p>
+<ul>
+<li>备案</li>
+</ul>
+<p>如果服务器是内地的就需要备案。Hexo网站的服务器是海外的因此可以跳过这步。</p>
+<ul>
+<li>添加解析记录</li>
+</ul>
+<p>认证成功后的域名才能被做解析。认证需要3-5个工作日。我的大概半天就OK了。  当解析状态变成【正常解析】时，点击域名记录最右侧操作的【解析】添加解析：</p>
+<p><img src="/img/jiexi.png" alt=""></p>
+<p>解析记录设置两个：www和@，线路默认就ok  </p>
+<p>(1)<strong>@</strong>:记录类型选A，A记录的就是ip地址，github(官方文档)提供了两个IP地址，192.30.252.153和192.30.252.154，这两个IP地址为github的服务器地址，两个都要填上  </p>
+<p>(2)<strong>www</strong>:记录类型选CNAME，CNAME记录值填你的github博客网址，如我的是Jacob-xu.github.io</p>
+<ul>
+<li>本地配置修改</li>
+</ul>
+<p>这些全部设置完成后，此时你并不能根据申请的域名访问你的博客。接着你需要做的是在hexo根目录的source文件夹里创建CNAME文件，不带任何后缀，里面添加你的域名信息，如：yuan-xu.com。</p>
+
+      
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2018/12/26/如何搭建自己的个人网站（下）/" class="article-date">
+  <time datetime="2018-12-26T07:52:41.000Z" itemprop="datePublished">2018-12-26</time>
+</a>
+
+        </li>
+        
+        
+        <hr>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2018/12/18/如何搭建自己的个人网站（上）/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何搭建自己的个人网站（上）</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr>
+      <div id="footerContent" class="footer-content">
+        <p>2018 zhuhai</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/typing.js"></script>
+<!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3/dist/html5shiv.min.js"></script><![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
