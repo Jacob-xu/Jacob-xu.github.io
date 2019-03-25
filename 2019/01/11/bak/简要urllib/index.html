@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="urllib库是python的内置http请求库，包括4个模块：  request：最基本的http请求模块，用来模拟发送请求  error：异常处理模块  parse：一个工具模块，提供许多URL处理方法，比如拆分、解析、合并  robotparser：主要用来识别网站的robots.txt文件，然后判断哪些网站可以爬，哪些不能爬，较少使用   &amp;nbsp; request模块 1.urlope">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简要urllib">
+<meta property="og:url" content="http://yoursite.com/2019/01/11/bak/简要urllib/index.html">
+<meta property="og:site_name" content="Yuan Xu">
+<meta property="og:description" content="urllib库是python的内置http请求库，包括4个模块：  request：最基本的http请求模块，用来模拟发送请求  error：异常处理模块  parse：一个工具模块，提供许多URL处理方法，比如拆分、解析、合并  robotparser：主要用来识别网站的robots.txt文件，然后判断哪些网站可以爬，哪些不能爬，较少使用   &amp;nbsp; request模块 1.urlope">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-11T09:11:25.374Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简要urllib">
+<meta name="twitter:description" content="urllib库是python的内置http请求库，包括4个模块：  request：最基本的http请求模块，用来模拟发送请求  error：异常处理模块  parse：一个工具模块，提供许多URL处理方法，比如拆分、解析、合并  robotparser：主要用来识别网站的robots.txt文件，然后判断哪些网站可以爬，哪些不能爬，较少使用   &amp;nbsp; request模块 1.urlope">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/11/bak/简要urllib/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>简要urllib | Yuan Xu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuan Xu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-posts">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br>posts</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photo">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/photography/" rel="section"><i class="menu-item-icon fa fa-fw fa-camera-retro"></i> <br>Photo</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-gab">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/gab/" rel="section"><i class="menu-item-icon fa fa-fw fa-comments"></i> <br>gab</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/bak/简要urllib/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuanxu">
+      <meta itemprop="description" content="袁旭的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan Xu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">简要urllib
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-11 15:47:06 / 修改时间：17:11:25" itemprop="dateCreated datePublished" datetime="2019-01-11T15:47:06+08:00">2019-01-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>urllib库是python的内置http请求库，包括4个模块：</p>
+<ul>
+<li><p>request：最基本的http请求模块，用来模拟发送请求</p>
+</li>
+<li><p>error：异常处理模块</p>
+</li>
+<li><p>parse：一个工具模块，提供许多URL处理方法，比如拆分、解析、合并</p>
+</li>
+<li><p>robotparser：主要用来识别网站的robots.txt文件，然后判断哪些网站可以爬，哪些不能爬，较少使用</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<h4 id="request模块"><a href="#request模块" class="headerlink" title="request模块"></a>request模块</h4><blockquote>
+<p><strong>1.<code>urlopen()</code></strong></p>
+</blockquote>
+<p><code>urllib.request</code>模块提供了最基本的构造HTTP请求的方法，利用它可以模拟浏览器的一个请求发起过程，同时它还带有处理授权验证（authenticaton）、重定向（redirection)、浏览器Cookies以及其他内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"></span><br><span class="line">response = urllib.request.urlopen(<span class="string">'https://www.python.org'</span>)</span><br><span class="line">print(response.read().decode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+<p>以上代码可以得到python官网的源码，类型是<code>HTTPResponse</code>，含<code>read()</code>、<code>readinto()</code>、<code>getheader(name)</code>、<code>getheaders()</code>、<code>fileno()</code>等方法，以及<code>msg</code>、<code>version</code>、<code>status</code>、<code>reason</code>、<code>debuglevel</code>、<code>closed</code>等属性。</p>
+<blockquote>
+<p><strong>2.<code>Request()</code></strong></p>
+</blockquote>
+<p>利用<code>urlopen()</code>方法可以实现最基本请求的发起，但这几个简单的参数并不足以构建一个完整的请求。如果请求中需要加入Headers等信息，就可以利用更强大的<code>Request</code>类来构建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"></span><br><span class="line">request = urllib.request.Request(<span class="string">'https://python.org'</span>)</span><br><span class="line">response = urllib.request.urlopen(request)</span><br><span class="line">print(response.read().decode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>第一个参数<code>url</code>用于请求URL，这是必传参数，其他都是可选参数。</p>
+</li>
+<li><p>第二个参数<code>data</code>如果要传，必须传<code>bytes</code>（字节流）类型的。如果它是字典，可以先用<code>urllib.parse</code>模块里的<code>urlencode()</code>编码。</p>
+</li>
+<li><p>第三个参数<code>headers</code>是一个字典，它就是请求头，我们可以在构造请求时通过<code>headers</code>参数直接构造，也可以通过调用请求实例的<code>add_header()</code>方法添加。</p>
+<p>添加请求头最常用的用法就是通过修改<code>User-Agent</code>来伪装浏览器，默认的<code>User-Agent</code>是Python-urllib，我们可以通过修改它来伪装浏览器</p>
+</li>
+<li><p>第四个参数<code>origin_req_host</code>指的是请求方的host名称或者IP地址。</p>
+</li>
+<li>第五个参数<code>unverifiable</code>表示这个请求是否是无法验证的，默认是<code>False</code>，意思就是说用户没有足够权限来选择接收这个请求的结果。例如，我们请求一个HTML文档中的图片，但是我们没有自动抓取图像的权限，这时unverifiable<code>的值就是</code>True`。</li>
+<li>第六个参数<code>method</code>是一个字符串，用来指示请求使用的方法，比如GET、POST和PUT等。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request, parse</span><br><span class="line"></span><br><span class="line">url = <span class="string">'http://httpbin.org/post'</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'</span>,</span><br><span class="line">    <span class="string">'Host'</span>: <span class="string">'httpbin.org'</span></span><br><span class="line">&#125;</span><br><span class="line">dict = &#123;</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'Germey'</span></span><br><span class="line">&#125;</span><br><span class="line">data = bytes(parse.urlencode(dict), encoding=<span class="string">'utf8'</span>)</span><br><span class="line">req = request.Request(url=url, data=data, headers=headers, method=<span class="string">'POST'</span>)</span><br><span class="line">response = request.urlopen(req)</span><br><span class="line">print(response.read().decode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h4 id="2-error模块"><a href="#2-error模块" class="headerlink" title="2.error模块"></a>2.error模块</h4><blockquote>
+<p><strong>1.<code>URLError()</code></strong></p>
+</blockquote>
+<p>requests模块生成的异常都可以通过捕获这个类来处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request, error</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    response = request.urlopen(<span class="string">'http://cuiqingcai.com/index.htm'</span>)</span><br><span class="line"><span class="keyword">except</span> error.URLError <span class="keyword">as</span> e:</span><br><span class="line">    print(e.reason)</span><br></pre></td></tr></table></figure>
+<p>打开一个不存在的网页，按理应该报错，但是这里捕获了，他会返回Not Found</p>
+<blockquote>
+<p><strong>2.<code>HTTPError()</code></strong></p>
+</blockquote>
+<p>它是URLError的子类，用来处理HTTP的请求错误</p>
+<ul>
+<li><strong><code>code</code></strong>：返回HTTP状态码，比如404表示网页不存在，500表示服务器内部错误等。</li>
+<li><strong><code>reason</code></strong>：同父类一样，用于返回错误的原因。</li>
+<li><strong><code>headers</code></strong>：返回请求头</li>
+</ul>
+<p>&nbsp;</p>
+<h4 id="3-parse模块"><a href="#3-parse模块" class="headerlink" title="3.parse模块"></a>3.parse模块</h4><blockquote>
+<p><strong>1.<code>urlparse()</code></strong></p>
+</blockquote>
+<p>这个方法实现URL的识别和分段</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse</span><br><span class="line"></span><br><span class="line">result = urlparse(<span class="string">'http://www.baidu.com/index.html;user?id=5#comment'</span>)</span><br><span class="line">print(type(result), result)</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">urllib</span>.<span class="title">parse</span>.<span class="title">ParseResult</span>'&gt;</span></span><br><span class="line"><span class="class"><span class="title">ParseResult</span><span class="params">(scheme=<span class="string">'http'</span>, netloc=<span class="string">'www.baidu.com'</span>, path=<span class="string">'/index.html'</span>, params=<span class="string">'user'</span>, query=<span class="string">'id=5'</span>, fragment=<span class="string">'comment'</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>把URL拆成了6部分</p>
+<blockquote>
+<p><strong>2.<code>urlunparse()</code></strong></p>
+</blockquote>
+<p>用来合并</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlunparse</span><br><span class="line"></span><br><span class="line">data = [<span class="string">'http'</span>, <span class="string">'www.baidu.com'</span>, <span class="string">'index.html'</span>, <span class="string">'user'</span>, <span class="string">'a=6'</span>, <span class="string">'comment'</span>]</span><br><span class="line">print(urlunparse(data))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>3.<code>urlsplit()</code></strong></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/10/HTTP基本原理/" rel="next" title="HTTP基本原理">
+                <i class="fa fa-chevron-left"></i> HTTP基本原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Yuanxu</p>
+              <div class="site-description motion-element" itemprop="description">袁旭的博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#request模块"><span class="nav-number">1.</span> <span class="nav-text">request模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-error模块"><span class="nav-number">2.</span> <span class="nav-text">2.error模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-parse模块"><span class="nav-number">3.</span> <span class="nav-text">3.parse模块</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuanxu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+<!-- 新增访客统计代码 -->
+
+<div class="busuanzi-count">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问用户： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div>
+    <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      访问次数： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+    <!-- 博客字数统计 -->
+    <span class="site-pv">
+      <i class="fa fa-pencil"></i>
+      博客全站共： <span class="post-count"></span> 字
+    </span>
+</div>
+<!-- 新增访客统计代码 END-->
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
